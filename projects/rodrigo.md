@@ -12,6 +12,6 @@ images:
   - src: /assets/uploads/Rodrigo/IMG_8249.jpg
   - src: /assets/uploads/Rodrigo/IMG_8261.jpg
 date: 2025-05-01T14:20:39.894Z
-position: 0
+position: 3
 ---
 

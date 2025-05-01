@@ -2,7 +2,7 @@
 
 	<div class="grid grid--header">
 
-		<a href="{{ '/' | url }}" class="grid__item grid__item--span-2 link-nostyle">
+		<a href="{{ '/' | url }}" class="grid__item grid__item--span-2 link-nostyle max-lg:mb--1">
       {# SEO: home page header title should be inside a h1 tag #}
       {% if page.url == "/" %}
 				<h1>{{ settings.metadata.site_title }}</h1>
@@ -21,11 +21,9 @@
 
 		<div class="grid__item grid__item--end">
 			{% if settings.metadata.site_social_url %}
-				<div class="grid__item grid__item--end">
 					<span>
 						<a href="{{ settings.metadata.site_social_url }}" target="_blank" rel="noopener">{{ settings.i18n.site_social_title }}</a>
 					</span>
-				</div>
 			{% endif %}
 		</div>
 

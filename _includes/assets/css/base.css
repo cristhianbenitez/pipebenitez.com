@@ -428,3 +428,9 @@ img {
 .mb--8 {
   margin-bottom: calc(var(--space) * 8);
 }
+
+@media (max-width: 768px) {
+  .max-lg\:mb--1 {
+    margin-bottom: var(--space);
+  }
+}

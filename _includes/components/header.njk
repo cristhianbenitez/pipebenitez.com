@@ -11,16 +11,23 @@
       {% endif %}
 		</a>
 
-		<a href="/contact" class="grid__item">Contact</a>
-		{# <a href="mailto:hello@pipebenitez.com?subject=Photography%20Inquiry" class="grid__item">Contact</a> #}
+		<div class="grid__item">
+			<a href="/contact" class="grid__item">Contact</a>
+			<span>,&nbsp;</span>
+			<a href="/negatives" class="grid__item">Negatives</a>
+		</div>
 
-		    {% if settings.metadata.site_social_url %}
-      <div class="grid__item grid__item--end">
-        <span>
-          <a href="{{ settings.metadata.site_social_url }}" target="_blank" rel="noopener">{{ settings.i18n.site_social_title }}</a>
-        </span>
-      </div>
-    {% endif %}
+			{# <a href="mailto:hello@pipebenitez.com?subject=Photography%20Inquiry" class="grid__item">Contact</a> #}
+
+		<div class="grid__item grid__item--end">
+			{% if settings.metadata.site_social_url %}
+				<div class="grid__item grid__item--end">
+					<span>
+						<a href="{{ settings.metadata.site_social_url }}" target="_blank" rel="noopener">{{ settings.i18n.site_social_title }}</a>
+					</span>
+				</div>
+			{% endif %}
+		</div>
 
 	</div>
 

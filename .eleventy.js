@@ -128,6 +128,13 @@ export default function (eleventyConfig) {
   // Merge 11ty data instead of overriding values
   eleventyConfig.setDataDeepMerge(true);
 
+  // The negatives collection, sorted by date
+  eleventyConfig.addCollection('negatives', function (collectionApi) {
+    return collectionApi
+      .getFilteredByGlob('negatives/*.md')
+      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+  });
+
   // The projects collection, sorted by the numerical position value and then by date
   eleventyConfig.addCollection('projects', function (collectionApi) {
     return (

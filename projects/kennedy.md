@@ -6,7 +6,7 @@ year: 2025
 images:
   - {}
   - {}
-  - {}
+  - src: /assets/uploads/Kennedy/IMG_2382.jpg
   - src: /assets/uploads/Kennedy/IMG_2526.jpg
   - src: /assets/uploads/Kennedy/IMG_2553.jpg
   - src: /assets/uploads/Kennedy/IMG_2706.jpg

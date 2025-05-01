@@ -27,6 +27,7 @@ export default defineConfig({
     maxSearchIndexFieldLength: 100,
   },
   schema: {
+    // Projects
     collections: [
       {
         name: 'project',

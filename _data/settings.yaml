@@ -40,7 +40,7 @@ theme:
     # default colors aka "light mode"
     background: '#ffffff'
     text: '#101010'
-    link: '#542BFF'
+    link: '#101010'
     # dark mode colors
     background_dark: '#101010'
     text_dark: '#E1E1E1'
@@ -82,7 +82,7 @@ i18n:
   # any valid ISO language code e.g. en or en-US
   site_language: en
   # single-language translations can be defined here
-  site_social_title: GitHub
+  site_social_title: Instagram
 # Internal config, hidden from Tina CMS
 config:
   # define responsive image widths for project thumbnails and large images

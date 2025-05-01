@@ -9,7 +9,10 @@ metadata:
   # site_subtitle_2: NYC Based Photographer
   # Home page description, accepts markdown
   site_description: >
-    New York City Based Photographer
+    I'm a photographer based in New York City, currently exploring the vastness of photography and also working in the intersection of photo, design and engineering. You can find my design work <a href="https://www.cristhiantilleria.com">here</a>
+  # Contact page description
+  contact_description: >
+    Feel free to reach out for collaborations, inquiries, or just to say hello. I'll get back to you as soon as possible.
   # footer contact email
   site_email: hello@pipebenitez.com
   # footer social link (the social title is defined in the i18n section)
@@ -47,7 +50,7 @@ theme:
     link_dark: '#FFFFFF'
   theme_typography:
     # font can be any variable Google Font name. Enter 'system' to use a system font stack
-    font: Overpass Mono
+    font: Space Grotesk
     # can be any valid variable font weight value e.g. 415
     font_weight: 400
     # adjust font_scale up/down to increase/decrease font size

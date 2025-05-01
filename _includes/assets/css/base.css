@@ -107,6 +107,42 @@ body {
 	}
 } */
 
+/* Form */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form .btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.form .btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.form .btn:active {
+  background: rgba(0, 0, 0, 0.12);
+  transform: translateY(0);
+}
+
 /* Color scheme toggle */
 
 .toggle__label {

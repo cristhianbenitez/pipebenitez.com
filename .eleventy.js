@@ -1,65 +1,75 @@
-import { DateTime } from "luxon";
-import CleanCSS from "clean-css";
-import UglifyJS from "uglify-js";
-import htmlmin from "html-minifier";
-import yaml from "js-yaml";
-import slugify from "slugify";
-import eleventyHelmetPlugin from "eleventy-plugin-helmet";
-import EleventyFetch from "@11ty/eleventy-fetch";
-import Image from "@11ty/eleventy-img";
-import MarkdownIt from "markdown-it";
-const mdRender = new MarkdownIt();
+import { DateTime } from 'luxon';
+import CleanCSS from 'clean-css';
+import UglifyJS from 'uglify-js';
+import htmlmin from 'html-minifier';
+import yaml from 'js-yaml';
+import slugify from 'slugify';
+import eleventyHelmetPlugin from 'eleventy-plugin-helmet';
+import EleventyFetch from '@11ty/eleventy-fetch';
+import Image from '@11ty/eleventy-img';
+import MarkdownIt from 'markdown-it';
+import dotenv from 'dotenv';
 
-export default function(eleventyConfig) {
+// Initialize dotenv
+dotenv.config();
 
-  eleventyConfig.addFilter("renderUsingMarkdown", function(rawString) {
+const mdRender = new MarkdownIt({
+  html: true, // Enable HTML tags in source
+  breaks: true, // Convert '\n' in paragraphs into <br>
+  linkify: true, // Autoconvert URL-like text to links
+});
+
+export default function (eleventyConfig) {
+  // Add environment variables to global data
+  eleventyConfig.addGlobalData('metadata', {
+    web3forms_key: process.env.WEB3FORMS_ACCESS_KEY,
+  });
+
+  eleventyConfig.addFilter('renderUsingMarkdown', function (rawString) {
     return mdRender.render(rawString);
   });
 
   // https://www.11ty.dev/docs/plugins/image/
   // Generate PNG icon files and a link tag from a source SVG or PNG file
-  eleventyConfig.addShortcode("favicon", async function(src) {
-
+  eleventyConfig.addShortcode('favicon', async function (src) {
     // Remove preceding slash from image path if it exists
-    src = src.startsWith("/") ? src.slice(1) : src;
+    src = src.startsWith('/') ? src.slice(1) : src;
 
-        let metadata = await Image(src, {
-            widths: [48,192,512],
-            formats: ["png"],
-      urlPath: "/",
-      outputDir: "./_site/",
+    let metadata = await Image(src, {
+      widths: [48, 192, 512],
+      formats: ['png'],
+      urlPath: '/',
+      outputDir: './_site/',
       filenameFormat: function (id, src, width, format, options) {
-            const name = "favicon";
+        const name = 'favicon';
         return `${name}-${width}.${format}`;
-      }
-        });
+      },
+    });
 
     // Build the icon link tag
     let data = metadata.png[0];
-        return `<link rel="icon" href="${data.url}" type="image/png">`;
-
-    });
+    return `<link rel="icon" href="${data.url}" type="image/png">`;
+  });
 
   // Shortcode to generate a responsive project image
-  eleventyConfig.addShortcode("generateImage", async function(params) {
-
+  eleventyConfig.addShortcode('generateImage', async function (params) {
     // Destructure the paramaters object and set some defaults
     let {
       src, // throw an error if src is missing
-      alt = "",
-      classes = "",
-      loadingType = "lazy",
-      viewportSizes = "",
-      outputWidths = ["1080","1800","2400"],
-      outputFormats = ["jpeg"],
+      alt = '',
+      classes = '',
+      loadingType = 'lazy',
+      viewportSizes = '',
+      outputWidths = ['1080', '1800', '2400'],
+      outputFormats = ['jpeg'],
       outputQualityJpeg = 75,
       outputQualityWebp = 75,
-      outputQualityAvif = 75
+      outputQualityAvif = 75,
     } = params;
 
     // Tina CMS prefixes uploaded img src with a forward slash (?)
     // Remove it from the image path if it exists
-    src = src.startsWith("/") ? src.slice(1) : src;
+    src = src.startsWith('/') ? src.slice(1) : src;
 
     let metadata = await Image(src, {
       widths: outputWidths,
@@ -67,8 +77,8 @@ export default function(eleventyConfig) {
       sharpWebpOptions: { quality: outputQualityWebp },
       sharpAvifOptions: { quality: outputQualityAvif },
       formats: outputFormats,
-      urlPath: "/assets/images/",
-      outputDir: "./_site/assets/images/",
+      urlPath: '/assets/images/',
+      outputDir: './_site/assets/images/',
       // cacheOptions: {
       //   // If image is a remote URL, this is the amount of time before 11ty fetches a fresh copy
       //   duration: "5y",
@@ -83,17 +93,21 @@ export default function(eleventyConfig) {
 
     // Detect and set image orientation
     if (lowsrc.width > lowsrc.height) {
-      orientation = "landscape";
+      orientation = 'landscape';
     } else if (lowsrc.width < lowsrc.height) {
-      orientation = "portrait";
+      orientation = 'portrait';
     } else {
-      orientation = "square";
+      orientation = 'square';
     }
 
     return `<picture class="${classes}" data-orientation="${orientation}">
-            ${Object.values(metadata).map(imageFormat => {
-                return `  <source type="${imageFormat[0].sourceType}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${viewportSizes}">`;
-            }).join("\n")}
+            ${Object.values(metadata)
+              .map((imageFormat) => {
+                return `  <source type="${imageFormat[0].sourceType}" srcset="${imageFormat
+                  .map((entry) => entry.srcset)
+                  .join(', ')}" sizes="${viewportSizes}">`;
+              })
+              .join('\n')}
                 <img
                     src="${lowsrc.url}"
                     width="${lowsrc.width}"
@@ -103,32 +117,34 @@ export default function(eleventyConfig) {
                     loading="${loadingType}"
                     decoding="async">
               </picture>`;
-  
   });
 
   // Add 11ty helmet plugin, for appending elements to <head>
   eleventyConfig.addPlugin(eleventyHelmetPlugin);
 
   // Add support for YAML data files with .yaml extension
-  eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
+  eleventyConfig.addDataExtension('yaml', (contents) => yaml.load(contents));
 
   // Merge 11ty data instead of overriding values
   eleventyConfig.setDataDeepMerge(true);
 
   // The projects collection, sorted by the numerical position value and then by date
-  eleventyConfig.addCollection("projects", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("projects/*.md")
-      //.filter(project => !Boolean(project.data.draft))
-      .sort((a, b) => b.data.position - a.data.position);
+  eleventyConfig.addCollection('projects', function (collectionApi) {
+    return (
+      collectionApi
+        .getFilteredByGlob('projects/*.md')
+        //.filter(project => !Boolean(project.data.draft))
+        .sort((a, b) => b.data.position - a.data.position)
+    );
   });
 
   // A filter to limit output of collection items
-  eleventyConfig.addFilter("limit", function (arr, limit) {
+  eleventyConfig.addFilter('limit', function (arr, limit) {
     return arr.slice(0, limit);
   });
 
   // A filter to limit and randomize output of collection items
-  eleventyConfig.addFilter("randomLimit", (arr, limit, currPage) => {
+  eleventyConfig.addFilter('randomLimit', (arr, limit, currPage) => {
     const pageArr = arr.filter((page) => page.url !== currPage);
     pageArr.sort(() => {
       return 0.5 - Math.random();
@@ -137,42 +153,42 @@ export default function(eleventyConfig) {
   });
 
   // Filter to format Google Fonts font name for use in link URLs
-  eleventyConfig.addFilter("formatGoogleFontName", name => {
+  eleventyConfig.addFilter('formatGoogleFontName', (name) => {
     return name.replace(/\s/g, '+');
   });
-  
+
   // Date formatting (human readable)
-  eleventyConfig.addFilter("dateFullYear", dateObj => {
-    return DateTime.fromJSDate(dateObj).toFormat("yyyy");
+  eleventyConfig.addFilter('dateFullYear', (dateObj) => {
+    return DateTime.fromJSDate(dateObj).toFormat('yyyy');
   });
 
   // base64 encode a string
-  eleventyConfig.addFilter("encodeURL", function(url) {
+  eleventyConfig.addFilter('encodeURL', function (url) {
     return encodeURIComponent(url);
   });
 
   // Minify CSS
-  eleventyConfig.addFilter("cssmin", function(code) {
+  eleventyConfig.addFilter('cssmin', function (code) {
     return new CleanCSS({}).minify(code).styles;
   });
 
   // Minify JS
-  eleventyConfig.addFilter("jsmin", function(code) {
+  eleventyConfig.addFilter('jsmin', function (code) {
     let minified = UglifyJS.minify(code);
     if (minified.error) {
-      console.log("UglifyJS error: ", minified.error);
+      console.log('UglifyJS error: ', minified.error);
       return code;
     }
     return minified.code;
   });
 
   // Minify HTML output
-  eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
-    if (outputPath.indexOf(".html") > -1) {
+  eleventyConfig.addTransform('htmlmin', function (content, outputPath) {
+    if (outputPath.indexOf('.html') > -1) {
       let minified = htmlmin.minify(content, {
         useShortDoctype: true,
         removeComments: true,
-        collapseWhitespace: true
+        collapseWhitespace: true,
       });
       return minified;
     }
@@ -180,59 +196,58 @@ export default function(eleventyConfig) {
   });
 
   // Create a hash from date (e.g. for permalinks)
-  eleventyConfig.addFilter("hashFromDate", dateObj => {
+  eleventyConfig.addFilter('hashFromDate', (dateObj) => {
     return new Number(DateTime.fromJSDate(dateObj)).toString(36);
   });
 
   // Universal slug filter makes-strict-urls-like-this
-  eleventyConfig.addFilter("slug", function(str) {
+  eleventyConfig.addFilter('slug', function (str) {
     return slugify(str, {
       lower: true,
-      replacement: "-",
-      strict: true
+      replacement: '-',
+      strict: true,
     });
   });
 
   // Shortcode to download, cache, and minify Google Fonts CSS to reduce HTTP requests on the front-end
   // TODO Consider downloading the font file itself and storing in the build cache
-  eleventyConfig.addShortcode("googleFontsCss", async function(url) {
-
+  eleventyConfig.addShortcode('googleFontsCss', async function (url) {
     let fontCss = await EleventyFetch(url, {
-      duration: "1d",
-      type: "text",
+      duration: '1d',
+      type: 'text',
       fetchOptions: {
         headers: {
           // Google Fonts API serves font formats based on the browser user-agent header
           // So here we pretend to be a browser... in this case, Chrome 74 on MacOS 14
-          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
-        }
-      }
+          'user-agent':
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
+        },
+      },
     });
 
     //return fontCss;
     return new CleanCSS({}).minify(fontCss).styles;
-  
   });
 
   // Copy folders or static assets e.g. images to site output
-  eleventyConfig.addPassthroughCopy({"assets/icons/favicon.svg" : "/favicon.svg"});
+  eleventyConfig.addPassthroughCopy({ 'assets/icons/favicon.svg': '/favicon.svg' });
 
   // Disable 11ty dev server live reload when using CMS locally
   eleventyConfig.setServerOptions({
-    liveReload: false
+    liveReload: false,
   });
 
   return {
-    templateFormats: ["md", "njk", "liquid"],
-    pathPrefix: "/",
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk",
+    templateFormats: ['md', 'njk', 'liquid'],
+    pathPrefix: '/',
+    markdownTemplateEngine: 'njk',
+    htmlTemplateEngine: 'njk',
+    dataTemplateEngine: 'njk',
     dir: {
-      input: ".",
-      includes: "_includes",
-      data: "_data",
-      output: "_site"
-    }
+      input: '.',
+      includes: '_includes',
+      data: '_data',
+      output: '_site',
+    },
   };
-};
+}

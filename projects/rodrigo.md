@@ -2,6 +2,7 @@
 draft: false
 title: Rodrigo
 description: ''
+year: 2023
 images:
   - src: /assets/uploads/IMG_8342.jpg
   - src: /assets/uploads/IMG_8353.jpg

@@ -190,9 +190,9 @@ img.loaded {
 }
 
 a:hover .hover-fade {
-  -webkit-filter: grayscale(0.5);
-  filter: grayscale(0.5);
-  opacity: 0.75;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  opacity: 1;
 }
 
 /* Typography */

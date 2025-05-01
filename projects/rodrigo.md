@@ -1,7 +1,8 @@
 ---
 draft: false
 title: Rodrigo
-description: ''
+description: |
+  asdas
 year: 2023
 images:
   - src: /assets/uploads/IMG_8342.jpg

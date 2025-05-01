@@ -11,6 +11,8 @@ import MarkdownIt from 'markdown-it';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 // Initialize dotenv
 dotenv.config();
@@ -20,6 +22,33 @@ const mdRender = new MarkdownIt({
   breaks: true, // Convert '\n' in paragraphs into <br>
   linkify: true, // Autoconvert URL-like text to links
 });
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+async function imageShortcode(src, alt, sizes = '100vw') {
+  if (!src) return '';
+
+  let metadata = await Image(src, {
+    widths: [300, 600, 900, 1200],
+    formats: ['avif', 'webp', 'jpeg'],
+    outputDir: './public/img/',
+    urlPath: '/img/',
+    cacheOptions: {
+      duration: '1y',
+      directory: '.cache/eleventy-cache/',
+      removeUrlQueryParams: false,
+    },
+  });
+
+  let imageAttributes = {
+    alt,
+    sizes,
+    loading: 'lazy',
+    decoding: 'async',
+  };
+
+  return Image.generateHTML(metadata, imageAttributes);
+}
 
 export default function (eleventyConfig) {
   // Add environment variables to global data
@@ -276,6 +305,18 @@ export default function (eleventyConfig) {
 
     return processedImages;
   });
+
+  // Watch CSS files for changes
+  eleventyConfig.addWatchTarget('./src/assets/css/');
+
+  // Image shortcode
+  eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode);
+  eleventyConfig.addLiquidShortcode('image', imageShortcode);
+  eleventyConfig.addJavaScriptFunction('image', imageShortcode);
+
+  // Asset passthrough
+  eleventyConfig.addPassthroughCopy('src/assets');
+  eleventyConfig.addPassthroughCopy('src/admin');
 
   return {
     templateFormats: ['md', 'njk', 'liquid'],

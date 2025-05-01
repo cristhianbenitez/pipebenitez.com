@@ -4,11 +4,14 @@
   "type": "module",
   "description": "Pipe Benitez Portfolio",
   "scripts": {
-    "build": "npx @11ty/eleventy",
+    "build": "NODE_ENV=production npx @11ty/eleventy",
+    "build:prod": "NODE_ENV=production ELEVENTY_PRODUCTION=true npx @11ty/eleventy",
     "watch": "npx @11ty/eleventy --watch",
     "serve": "npx @11ty/eleventy --serve",
     "debug": "DEBUG=* npx @11ty/eleventy",
-    "dev": "npx tinacms build -c 'npx eleventy --serve'"
+    "dev": "NODE_ENV=development npx tinacms build -c 'npx eleventy --serve'",
+    "clean": "rm -rf public .cache",
+    "build:clean": "npm run clean && npm run build:prod"
   },
   "author": {
     "name": "Cristhian Tilleria",

@@ -1,8 +1,8 @@
 {
-  "name": "halide",
+  "name": "pipebenitez.com",
   "version": "1.0.0",
   "type": "module",
-  "description": "Halide is a new, minimalist, responsive portfolio website designed for photographers and still image creators",
+  "description": "Pipe Benitez Portfolio",
   "scripts": {
     "build": "npx @11ty/eleventy",
     "watch": "npx @11ty/eleventy --watch",
@@ -10,20 +10,11 @@
     "debug": "DEBUG=* npx @11ty/eleventy",
     "dev": "npx tinacms build -c 'npx eleventy --serve'"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/danurbanowicz/halide"
-  },
   "author": {
-    "name": "Dan Urbanowicz",
-    "email": "dan.urbanowicz@gmail.com",
-    "url": "https://github.com/danurbanowicz"
+    "name": "Cristhian Tilleria",
+    "email": "cristhiantilleria@gmail.com",
+    "url": "https://github.com/pipebenitez"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/danurbanowicz/halide/issues"
-  },
-  "homepage": "https://github.com/danurbanowicz/halide",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-fetch": "^5.0.2",

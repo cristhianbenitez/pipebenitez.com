@@ -4,7 +4,6 @@ title: Kennedy
 description: ''
 year: 2025
 images:
-  - {}
   - src: /assets/uploads/Kennedy/IMG_2336.jpg
   - src: /assets/uploads/Kennedy/IMG_2382.jpg
   - src: /assets/uploads/Kennedy/IMG_2526.jpg

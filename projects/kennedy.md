@@ -7,7 +7,7 @@ images:
   - {}
   - {}
   - {}
-  - {}
+  - src: /assets/uploads/Kennedy/IMG_2526.jpg
   - src: /assets/uploads/Kennedy/IMG_2553.jpg
   - src: /assets/uploads/Kennedy/IMG_2706.jpg
   - src: /assets/uploads/Kennedy/IMG_3661.jpg

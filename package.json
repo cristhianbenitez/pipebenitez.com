@@ -7,7 +7,8 @@
     "build": "npx @11ty/eleventy",
     "watch": "npx @11ty/eleventy --watch",
     "serve": "npx @11ty/eleventy --serve",
-    "debug": "DEBUG=* npx @11ty/eleventy"
+    "debug": "DEBUG=* npx @11ty/eleventy",
+    "dev": "npx tinacms build -c 'npx eleventy --serve'"
   },
   "repository": {
     "type": "git",

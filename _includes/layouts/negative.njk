@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="negative-image">
+  {% if image %}
+    <img
+      src="{{ image }}"
+      alt="{{ title }}"
+      width="1800"
+      height="1200"
+      loading="{{ imageOptions.loading }}"
+      decoding="{{ imageOptions.decoding }}"
+      class="w-full h-auto object-cover"
+    >
+  {% endif %}
+</div>

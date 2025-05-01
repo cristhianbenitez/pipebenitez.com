@@ -4,7 +4,7 @@ title: Anam
 description: ''
 year: 2023
 images:
-  - {}
+  - src: /assets/uploads/Anam/IMG_1223.jpg
   - src: /assets/uploads/Anam/IMG_1315.jpg
   - src: /assets/uploads/Anam/IMG_1333.jpg
   - src: /assets/uploads/Anam/IMG_1556.jpg

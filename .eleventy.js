@@ -9,6 +9,8 @@ import EleventyFetch from '@11ty/eleventy-fetch';
 import Image from '@11ty/eleventy-img';
 import MarkdownIt from 'markdown-it';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 
 // Initialize dotenv
 dotenv.config();
@@ -235,6 +237,44 @@ export default function (eleventyConfig) {
   // Disable 11ty dev server live reload when using CMS locally
   eleventyConfig.setServerOptions({
     liveReload: false,
+  });
+
+  // Add a new function to get and process negative images
+  eleventyConfig.addGlobalData('negativeImages', async function () {
+    const negativesDir = 'assets/negatives';
+    const files = fs.readdirSync(negativesDir);
+    const imageFiles = files.filter((file) => /\.(jpg|jpeg|png|gif)$/i.test(file));
+
+    const processedImages = await Promise.all(
+      imageFiles.map(async (file) => {
+        const imagePath = path.join(negativesDir, file);
+        const metadata = await Image(imagePath, {
+          widths: [400, 800, 1200],
+          formats: ['webp', 'jpeg'],
+          urlPath: '/assets/images/',
+          outputDir: './_site/assets/images/',
+          filenameFormat: (id, src, width, format) => {
+            const extension = path.extname(src);
+            const name = path.basename(src, extension);
+            return `${name}-${width}.${format}`;
+          },
+        });
+
+        return {
+          src: metadata.jpeg[metadata.jpeg.length - 1].url,
+          srcset: {
+            webp: metadata.webp.map((img) => img.srcset).join(', '),
+            jpeg: metadata.jpeg.map((img) => img.srcset).join(', '),
+          },
+          sizes: '(min-width: 1140px) 16.66vw, (min-width: 540px) 25vw, 50vw',
+          width: metadata.jpeg[0].width,
+          height: metadata.jpeg[0].height,
+          alt: path.basename(file, path.extname(file)),
+        };
+      })
+    );
+
+    return processedImages;
   });
 
   return {

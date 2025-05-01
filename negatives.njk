@@ -2,3 +2,165 @@
 layout: layouts/base.njk
 title: Negatives
 ---
+<div class="columns">
+  {% for image in negativeImages %}
+    <div class="columns__item mb--1">
+      <div class="image-container">
+        <div class="image-wrapper" onclick="openPreview(this)" data-index="{{ loop.index0 }}">
+          <picture>
+            <source type="image/webp" srcset="{{ image.srcset.webp }}" sizes="{{ image.sizes }}">
+            <source type="image/jpeg" srcset="{{ image.srcset.jpeg }}" sizes="{{ image.sizes }}">
+            <img
+              src="{{ image.src }}"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+              alt="{{ image.alt }}"
+              loading="lazy"
+              decoding="async"
+              class="grid__item-image hover-fade"
+            >
+          </picture>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<div id="preview-overlay" onclick="closePreview()">
+  <div class="preview-content" onclick="event.stopPropagation()">
+    <img id="preview-image" src="" alt="" loading="lazy">
+  </div>
+</div>
+
+<style>
+  .image-wrapper {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    position: relative;
+  }
+
+  .image-wrapper:hover {
+    opacity: 0.9;
+  }
+
+  .grid__item-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  #preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  #preview-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .preview-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    position: relative;
+  }
+
+  #preview-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  @media (min-width: 540px) {
+    .columns {
+      column-count: 4;
+      column-gap: var(--space-2);
+    }
+  }
+
+  @media (min-width: 1140px) {
+    .columns {
+      column-count: 6;
+    }
+  }
+</style>
+
+<script>
+  let currentImageIndex = 0;
+  const imageWrappers = document.querySelectorAll('.image-wrapper');
+  const totalImages = imageWrappers.length;
+
+  function openPreview(element) {
+    currentImageIndex = parseInt(element.dataset.index);
+    updatePreviewImage(element);
+  }
+
+  function updatePreviewImage(element) {
+    const img = element.querySelector('img');
+    const overlay = document.getElementById('preview-overlay');
+    const previewImage = document.getElementById('preview-image');
+
+    // Use the largest available image for the preview
+    const sources = element.querySelectorAll('source');
+    const largestSrc = sources[0].srcset.split(',').pop().trim().split(' ')[0];
+
+    previewImage.src = largestSrc;
+    previewImage.alt = img.alt;
+
+    requestAnimationFrame(() => {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  function closePreview() {
+    const overlay = document.getElementById('preview-overlay');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+
+    overlay.addEventListener('transitionend', function handler() {
+      if (!overlay.classList.contains('active')) {
+        overlay.style.display = 'none';
+      }
+      overlay.removeEventListener('transitionend', handler);
+    });
+  }
+
+  function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % totalImages;
+    updatePreviewImage(imageWrappers[currentImageIndex]);
+  }
+
+  function showPreviousImage() {
+    currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+    updatePreviewImage(imageWrappers[currentImageIndex]);
+  }
+
+  // Handle keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    const overlay = document.getElementById('preview-overlay');
+    if (!overlay.classList.contains('active')) return;
+
+    switch(e.key) {
+      case 'Escape':
+        closePreview();
+        break;
+      case 'ArrowRight':
+        showNextImage();
+        break;
+      case 'ArrowLeft':
+        showPreviousImage();
+        break;
+    }
+  });
+</script>

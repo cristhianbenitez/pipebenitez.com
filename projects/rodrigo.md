@@ -3,7 +3,7 @@ draft: false
 title: Rodrigo
 description: ''
 images:
-  - {}
+  - src: /assets/uploads/IMG_8342.jpg
   - src: /assets/uploads/IMG_8353.jpg
     caption: >-
       Man in a black leather jacket and sunglasses standing by a waterfront

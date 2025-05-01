@@ -5,6 +5,7 @@ description: ''
 year: 2025
 images:
   - src: /assets/uploads/Alyssa/IMG_1403.jpg
+  - src: /assets/uploads/Alyssa/IMG_0474.jpg
   - {}
   - src: /assets/uploads/Alyssa/IMG_0523.jpg
   - src: /assets/uploads/Alyssa/IMG_0690.jpg

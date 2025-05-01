@@ -29,10 +29,14 @@ metadata:
     site_title: Pipe Benitez
     # meta description
     site_description: >-
-      NYC Based Photographer
+      NYC-based photographer exploring the intersection of photography, design, and engineering. Creating visual narratives.
     # Adds a noindex <meta> tag on all site pages, be careful y'all!
     # Instead you can block indexing per-project with no_index: true
     no_index: false
+  # SEO optimization
+  seo_keywords: 'NYC photographer, creative photography, design engineering, visual storytelling, New York City photography, multidisciplinary artist'
+  og_type: 'website'
+  twitter_card: 'summary_large_image'
 # theme customization
 theme:
   theme_layout:

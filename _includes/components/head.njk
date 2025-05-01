@@ -1,11 +1,36 @@
 <head>
   <meta charset="utf-8">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {% if settings.metadata.site_ga4_id %}
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  {% endif %}
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  {# Resource Hints #}
+  <link rel="preload" href="{{ settings.metadata.site_icon_svg or settings.metadata.site_icon_png }}" as="image">
+
   <meta name="author" content="https://github.com/cristhianbenitez">
   <meta name="generator" content="{{ eleventy.generator }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {# Security Headers #}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="{{ settings.theme.theme_colors.background }}">
+
+  {# Social Media Meta Tags #}
+  <meta property="og:title" content="{% if page.url == '/' %}{{ settings.metadata.seo.site_title or settings.metadata.site_title }}{% else %}Pipe Benitez | {{ seo.title or title }}{% endif %}">
+  <meta property="og:description" content="{% if page.url == '/' %}{{ settings.metadata.seo.site_description or settings.metadata.site_description }}{% else %}{{ seo.description or description }}{% endif %}">
+  <meta property="og:image" content="{{ settings.metadata.site_url }}{{ settings.metadata.site_icon_svg or settings.metadata.site_icon_png }}">
+  <meta property="og:url" content="{{ settings.metadata.site_url }}{{ page.url }}">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.url == '/' %}{{ settings.metadata.seo.site_title or settings.metadata.site_title }}{% else %}Pipe Benitez | {{ seo.title or title }}{% endif %}">
+  <meta name="twitter:description" content="{% if page.url == '/' %}{{ settings.metadata.seo.site_description or settings.metadata.site_description }}{% else %}{{ seo.description or description }}{% endif %}">
+  <meta name="twitter:image" content="{{ settings.metadata.site_url }}{{ settings.metadata.site_icon_svg or settings.metadata.site_icon_png }}">
 
   {# Set the SVG favicon for browsers that support it #}
   <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">

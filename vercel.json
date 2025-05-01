@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npx tinacms build && eleventy",
+  "outputDirectory": "_site",
+  "framework": "eleventy",
+  "installCommand": "npm install",
+  "env": {
+    "TINA_CMS_CLIENT_ID": "@tina_cms_client_id",
+    "TINA_CMS_TOKEN": "@tina_cms_token",
+    "TINA_CMS_SEARCH_TOKEN": "@tina_cms_search_token"
+  }
+}

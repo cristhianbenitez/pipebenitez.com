@@ -228,6 +228,10 @@ img {
     grid-column: span 4;
   }
 
+  .grid__item--span-2 {
+    grid-column: span 2;
+  }
+
   .columns {
     -moz-column-gap: calc(var(--space) * 1.25);
     column-gap: calc(var(--space) * 1.25);
@@ -254,6 +258,10 @@ img {
 
   .grid__item--span-4 {
     grid-column: span 2/5;
+  }
+
+  .grid__item--span-2 {
+    grid-column: span 2;
   }
 
   .grid--header,
@@ -292,6 +300,10 @@ img {
 @media (min-width: 1140px) {
   .grid__item--span-4 {
     grid-column: span 2/5;
+  }
+
+  .grid__item--span-2 {
+    grid-column: span 2;
   }
 
   .columns {

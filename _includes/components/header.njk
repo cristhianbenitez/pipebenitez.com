@@ -2,7 +2,7 @@
 
 	<div class="grid grid--header">
 
-		<a href="{{ '/' | url }}" class="grid__item link-nostyle">
+		<a href="{{ '/' | url }}" class="grid__item grid__item--span-2 link-nostyle">
       {# SEO: home page header title should be inside a h1 tag #}
       {% if page.url == "/" %}
 				<h1>{{ settings.metadata.site_title }}</h1>
@@ -11,26 +11,15 @@
       {% endif %}
 		</a>
 
-		<a href="https://www.instagram.com/pipephotos_" class="grid__item">Instagram</a>
-
 		<a href="mailto:hello@pipebenitez.com?subject=Photography%20Inquiry" class="grid__item">Contact</a>
 
-		{% if settings.theme.theme_features.enable_dark_mode %}
-
-			<div class="grid__item grid__item--end grid__item--top">
-				<div class="dark-toggle">
-					<label for="toggle" class="toggle__label">
-						<span class="toggle__text">Toggle Dark Mode</span>
-						<input type="checkbox" name="toggle" id="toggle" class="toggle__checkbox">
-						<svg width="14" height="14" viewBox="0 0 16 16">
-							<circle pid="0" cx="8" cy="8" r="7.5" fill="var(--color-text)" stroke="var(--color-text)"></circle>
-							<path pid="1" d="M1 8a7 7 0 007 7V1a7 7 0 00-7 7z" fill="var(--color-background)"></path>
-						</svg>
-					</label>
-				</div>
-			</div>
-
-		{% endif %}
+		    {% if settings.metadata.site_social_url %}
+      <div class="grid__item">
+        <span>
+          <a href="{{ settings.metadata.site_social_url }}" target="_blank" rel="noopener">{{ settings.i18n.site_social_title }}</a>
+        </span>
+      </div>
+    {% endif %}
 
 	</div>
 

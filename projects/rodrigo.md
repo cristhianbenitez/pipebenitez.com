@@ -4,12 +4,7 @@ title: Rodrigo
 description: ''
 year: 2023
 images:
-  - src: /assets/uploads/IMG_8305.jpg
-  - src: /assets/uploads/IMG_8342.jpg
-  - src: /assets/uploads/IMG_8353.jpg
-    caption: >-
-      Man in a black leather jacket and sunglasses standing by a waterfront
-      railing at sunset, with modern skyscrapers and a ferry in the background
+  - src: /assets/uploads/Rodrigo/IMG_8353.jpg
 date: 2025-05-01T14:20:39.894Z
 position: 0
 ---

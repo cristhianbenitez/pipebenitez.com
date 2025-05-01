@@ -179,6 +179,7 @@ export default defineConfig({
             required: true,
           },
           {
+<<<<<<< HEAD
             type: 'image',
             name: 'image',
             label: 'Negative Image',
@@ -189,6 +190,31 @@ export default defineConfig({
             name: 'date',
             label: 'Date Taken',
             required: true,
+=======
+            type: 'datetime',
+            name: 'date',
+            label: 'Date',
+            required: true,
+            ui: {
+              dateFormat: 'YYYY-MM-DD',
+              timeFormat: 'HH:mm',
+            },
+          },
+          {
+            type: 'image',
+            name: 'image',
+            label: 'Image',
+            required: true,
+            ui: {
+              clearable: true,
+            },
+          },
+          {
+            type: 'rich-text',
+            name: 'body',
+            label: 'Description',
+            isBody: true,
+>>>>>>> 0504051 (Add 'negatives' collection to Eleventy config, update header layout for better organization, and refine TinaCMS configuration for new 'negatives' content type.)
           },
         ],
       },

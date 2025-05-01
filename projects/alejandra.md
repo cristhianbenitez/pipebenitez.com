@@ -4,7 +4,6 @@ title: Alejandra
 description: ''
 year: 2021
 images:
-  - {}
   - src: /assets/uploads/Alejandra/IMG_3338.jpg
   - src: /assets/uploads/Alejandra/IMG_3343.jpg
   - src: /assets/uploads/Alejandra/IMG_3368.jpg

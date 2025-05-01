@@ -122,7 +122,8 @@ body {
 }
 
 .form input,
-.form textarea {
+.form textarea,
+.form select {
   padding: 0.2rem;
 }
 

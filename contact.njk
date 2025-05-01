@@ -18,7 +18,9 @@ permalink: "/contact/index.html"
     <form class="form grid__item--span-4 mw--readable" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="{{ metadata.web3forms_key }}">
       <input type="hidden" name="subject" value="Photoshoot Inquiry">
-      <input type="checkbox" name="botcheck" class="hidden" style="display: none; visibility: hidden; position: absolute; left: -9999px;">
+      <div style="display:none!important;">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+      </div>
 
       <div class="form__group">
         <label class="form__label" for="name">Name</label>

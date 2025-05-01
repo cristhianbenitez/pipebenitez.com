@@ -1,7 +1,8 @@
 ---
 draft: false
 title: Rodrigo
-description: ''
+description: |
+  asdasdsa
 images:
   - src: /assets/uploads/IMG_8353.jpg
     caption: >-

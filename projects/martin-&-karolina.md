@@ -3,7 +3,7 @@ draft: false
 title: Martin & Karolina
 description: ''
 images:
-  - {}
+  - src: /assets/uploads/Martin%20&%20Karolina/IMG_7072.jpg
   - src: /assets/uploads/Martin%20&%20Karolina/IMG_7094.jpg
   - {}
   - src: /assets/uploads/Martin%20&%20Karolina/IMG_7121.jpg

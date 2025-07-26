@@ -1,78 +1,53 @@
-# Halide Settings
-# Site metadata
+config:
+  image_grid_width_sm: 640
+  image_grid_width_md: 1080
+  image_grid_width_lg: 1800
+  image_width_sm: 1080
+  image_width_md: 1800
+  image_width_lg: 2400
+  font_stack_system: >-
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
 metadata:
-  # site_url should match your full production URL
   site_url: 'https://pipebenitez.com'
   site_title: Pipe Benitez
-  # site subtitles are optional
-  # site_subtitle_1: NYC Photographer
-  # site_subtitle_2: NYC Based Photographer
-  # Home page description, accepts markdown
   site_description: >
-    Taking photos in New York City. Mostly people, sometimes places. Also making things with <a href="https://www.cristhiantilleria.com">design and code</a>. It’s not always connected, but it feels part of the same thread.
-  # Contact page description
-  contact_description: >
-    Feel free to reach out for collaborations, inquiries, or just to say hello. I'll get back to you as soon as possible.
-  # footer contact email
+    Taking photos in New York City. Mostly people, sometimes places. Also making
+    things with <a href="https://www.cristhiantilleria.com">design and code</a>.
+    It’s not always connected, but it feels part of the same thread.
   site_email: hello@pipebenitez.com
-  # footer social link (the social title is defined in the i18n section)
-  site_social_url: 'https://www.instagram.com/pipephotos_/'
-  # SVG image used for sharing/bookmark icons
+  site_social_url: 'https://www.instagram.com/pipephoto_/'
   site_icon_svg: /assets/uploads/favicon.svg
-  # optional PNG image used for sharing/bookmark icons
   site_icon_png: ''
-  # add a GA4 ID to enable Google Analytics e.g. G-123456789
   site_ga4_id: ''
-  # home page SEO fields
   seo:
-    # <title> tag
     site_title: Pipe Benitez
-    # meta description
     site_description: >-
-      NYC-based photographer exploring the intersection of photography, design, and engineering. Creating visual narratives.
-    # Adds a noindex <meta> tag on all site pages, be careful y'all!
-    # Instead you can block indexing per-project with no_index: true
+      NYC-based photographer exploring the intersection of photography, design,
+      and engineering. Creating visual narratives.
     no_index: false
-  # SEO optimization
-  seo_keywords: 'NYC photographer, creative photography, design engineering, visual storytelling, New York City photography, multidisciplinary artist'
-  og_type: 'website'
-  twitter_card: 'summary_large_image'
-# theme customization
 theme:
   theme_layout:
-    # scale to increase/decrease padding, margins, gaps etc
     space_scale: 100
-  # theme colors can be hex, rgb, rgba or any valid CSS color value
   theme_colors:
-    # default colors aka "light mode"
     background: '#ffffff'
     text: '#101010'
     link: '#101010'
-    # dark mode colors
     background_dark: '#101010'
     text_dark: '#E1E1E1'
     link_dark: '#FFFFFF'
   theme_typography:
-    # font can be any variable Google Font name. Enter 'system' to use a system font stack
     font: Space Grotesk
-    # can be any valid variable font weight value e.g. 415
     font_weight: 400
-    # adjust font_scale up/down to increase/decrease font size
     font_scale: 100
-    # adjust line_height_scale up/down to increase/decrease line height
     line_height_scale: 100
-    # underline links
-    link_underline: true
   theme_features:
-    # enables the dark mode toggle and detects the user's dark mode preference
     enable_dark_mode: true
-    # max number of home page image grid items
     item_output_limit: 48
-    # animations transition in milliseconds
     transition_duration: 300
     show_project_year: true
     show_project_grid_titles: true
-# Image settings (lovell/sharp). JPEG format can't be disabled via the CMS.
 images:
   avif:
     enabled: false
@@ -80,25 +55,8 @@ images:
     enabled: true
     quality: 75
   jpeg:
-    # at least JPEG should be enabled
     enabled: true
-    # Compression quality from 1-100
     quality: 75
-# Locale and translations
 i18n:
-  # any valid ISO language code e.g. en or en-US
   site_language: en
-  # single-language translations can be defined here
   site_social_title: Instagram
-# Internal config, hidden from Tina CMS
-config:
-  # define responsive image widths for project thumbnails and large images
-  # modifying these will require a corresponding change to viewport sizes in responsive image markup
-  image_grid_width_sm: 640
-  image_grid_width_md: 1080
-  image_grid_width_lg: 1800
-  image_width_sm: 1080
-  image_width_md: 1800
-  image_width_lg: 2400
-  # define the optional system font stack
-  font_stack_system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"

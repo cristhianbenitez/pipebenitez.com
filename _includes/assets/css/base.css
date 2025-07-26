@@ -184,8 +184,7 @@ img.loaded {
 .hover-fade {
   transition: opacity var(--transition-time), -webkit-filter var(--transition-time);
   transition: filter var(--transition-time), opacity var(--transition-time);
-  transition: filter var(--transition-time), opacity var(--transition-time),
-    -webkit-filter var(--transition-time);
+  transition: filter var(--transition-time), opacity var(--transition-time), -webkit-filter var(--transition-time);
   opacity: 1;
 }
 
@@ -434,4 +433,24 @@ img {
   .max-lg\:mb--1 {
     margin-bottom: var(--space);
   }
+}
+
+/* Navigation Links */
+
+a[href].nav-link {
+  position: relative;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a[href].nav-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  text-decoration-thickness: 0.1rem;
+}
+
+a[href].nav-link--active {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  text-decoration-thickness: 0.1rem;
 }

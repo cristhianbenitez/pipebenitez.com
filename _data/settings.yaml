@@ -41,7 +41,7 @@ theme:
     text_dark: '#E1E1E1'
     link_dark: '#FFFFFF'
   theme_typography:
-    font: Space Grotesk
+    font: Inter
     font_weight: 400
     font_scale: 100
     line_height_scale: 100

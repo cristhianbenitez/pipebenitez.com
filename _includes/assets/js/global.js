@@ -33,8 +33,8 @@ if (contactForm) {
         method: 'POST',
         body: new FormData(contactForm),
         headers: {
-          Accept: 'application/json',
-        },
+          Accept: 'application/json'
+        }
       });
 
       const data = await response.json();
@@ -60,3 +60,32 @@ if (contactForm) {
     }
   });
 }
+
+// Navigation active state handling
+window.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.nav-link[data-nav-path]');
+  const currentPath = window.location.pathname;
+  console.log(navLinks);
+  console.log(currentPath);
+
+  // Remove active class from all links first
+  navLinks.forEach((link) => link.classList.remove('nav-link--active'));
+
+  // Find and activate the matching link
+  navLinks.forEach((link) => {
+    const linkPath = link.getAttribute('data-nav-path');
+
+    // Normalize paths for comparison
+    const normalizedCurrentPath = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '');
+    const normalizedLinkPath = linkPath === '/' ? '/' : linkPath.replace(/\/$/, '');
+
+    // Check if current path matches the link path
+    const isActive =
+      normalizedCurrentPath === normalizedLinkPath ||
+      (linkPath === '/' && (currentPath === '/' || currentPath === '/index.html' || currentPath === ''));
+
+    if (isActive) {
+      link.classList.add('nav-link--active');
+    }
+  });
+});

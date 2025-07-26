@@ -1,32 +1,31 @@
 <header class="p--2">
-
-	<div class="grid grid--header">
-
-		<a href="{{ '/' | url }}" class="grid__item grid__item--span-2 link-nostyle max-lg:mb--1">
-      {# SEO: home page header title should be inside a h1 tag #}
-      {% if page.url == "/" %}
-				<h1>{{ settings.metadata.site_title }}</h1>
+  <div class="grid grid--header">
+    <a href="{{ '/' | url }}" class="grid__item grid__item--span-2 link-nostyle max-lg:mb--1">
+      {# SEO: home page header title should be inside a h1 tag #} {% if page.url == "/" %}
+      <h1>{{ settings.metadata.site_title }}</h1>
       {% else %}
-        <span>{{ settings.metadata.site_title }}</span>
+      <span>{{ settings.metadata.site_title }}</span>
       {% endif %}
-		</a>
+    </a>
 
-		<div class="grid__item">
-			<a href="/negatives" class="grid__item">Negatives</a>
-			<span>,&nbsp;</span>
-			<a href="/contact" class="grid__item">Contact</a>
-		</div>
+    <div class="grid__item">
+      <a href="/" class="grid__item nav-link nav-link--active" data-nav-path="/">Overview</a>
+      <span>,&nbsp;</span>
+      <a href="/negatives" class="grid__item nav-link" data-nav-path="/negatives">Negatives</a>
+      <span>,&nbsp;</span>
+      <a href="/contact" class="grid__item nav-link" data-nav-path="/contact">Contact</a>
+    </div>
 
-			{# <a href="mailto:hello@pipebenitez.com?subject=Photography%20Inquiry" class="grid__item">Contact</a> #}
+    {# <a href="mailto:hello@pipebenitez.com?subject=Photography%20Inquiry" class="grid__item">Contact</a> #}
 
-		<div class="grid__item grid__item--end">
-			{% if settings.metadata.site_social_url %}
-					<span>
-						<a href="{{ settings.metadata.site_social_url }}" target="_blank" rel="noopener">{{ settings.i18n.site_social_title }}</a>
-					</span>
-			{% endif %}
-		</div>
-
-	</div>
-
+    <div class="grid__item grid__item--end">
+      {% if settings.metadata.site_social_url %}
+      <span>
+        <a href="{{ settings.metadata.site_social_url }}" target="_blank" rel="noopener">{{
+          settings.i18n.site_social_title
+        }}</a>
+      </span>
+      {% endif %}
+    </div>
+  </div>
 </header>

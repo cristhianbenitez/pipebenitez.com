@@ -2,8 +2,9 @@
 layout: layouts/base.njk
 section: contact
 title: Contact
-permalink: "/contact/index.html"
+permalink: '/contact/index.html'
 ---
+
 <article class="pb--4">
   <header class="pb--4">
     <div class="grid grid--intro">
@@ -17,24 +18,24 @@ permalink: "/contact/index.html"
   <section class="grid grid--intro">
     <form class="form grid__item--span-4 mw--readable" action="https://api.web3forms.com/submit" method="POST">
       {% if metadata.web3forms_key %}
-      <input type="hidden" name="access_key" value="{{ metadata.web3forms_key }}">
+      <input type="hidden" name="access_key" value="{{ metadata.web3forms_key }}" />
       {% else %}
       <!-- Fallback for build process -->
-      <input type="hidden" name="access_key" value="YOUR-ACCESS-KEY-HERE">
+      <input type="hidden" name="access_key" value="YOUR-ACCESS-KEY-HERE" />
       {% endif %}
-      <input type="hidden" name="subject" value="Photoshoot Inquiry">
-      <div style="display:none!important;">
-        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="subject" value="Photoshoot Inquiry" />
+      <div style="display: none !important">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
       </div>
 
       <div class="form__group">
         <label class="form__label" for="name">Name</label>
-        <input class="form__input" type="text" id="name" name="name" required>
+        <input class="form__input" type="text" id="name" name="name" required />
       </div>
 
       <div class="form__group">
         <label class="form__label" for="email">Email</label>
-        <input class="form__input" type="email" id="email" name="email" required>
+        <input class="form__input" type="email" id="email" name="email" required />
       </div>
 
       <div class="form__group">
@@ -60,5 +61,7 @@ permalink: "/contact/index.html"
   </section>
 </article>
 
-{# Appended to <head> during build #}
-{% include "components/opengraph.njk" %}
+{# Appended to
+<head>
+  during build #} {% include "components/opengraph.njk" %}
+</head>
